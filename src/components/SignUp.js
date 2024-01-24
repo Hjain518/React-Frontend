@@ -31,27 +31,29 @@ const SignUp = ({ onNext }) => {
     }
     return errors;
   };
-
+//   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = handleValidation();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      try {
-        await api.post('/user/signup', {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-        });
+      navigate("/money-matters");
+      //   try {
+      //     // await api.post('/user/signup', {
+      //     //   firstName: formData.firstName,
+      //     //   lastName: formData.lastName,
+      //     //   email: formData.email,
+      //     //   password: formData.password,
+      //     // });
 
-        setErrors({});
-        onNext();
-      } catch (error) {
-        console.error('Error during sign-up:', error.response.data.error);
-        setErrors({ api: 'Error during sign-up. Please try again.' });
-      }
+      //     setErrors({});
+      //     useNavigate('/money-matters')
+      //     onNext();
+      //   } catch (error) {
+      //     console.error('Error during sign-up:', error.response.data.error);
+      //     setErrors({ api: 'Error during sign-up. Please try again.' });
+      //   }
     }
   };
   return (
