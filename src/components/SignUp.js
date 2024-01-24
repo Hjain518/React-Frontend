@@ -39,24 +39,21 @@ const SignUp = ({ onNext }) => {
       setErrors(validationErrors);
     } else {
       try {
-        const response = await api.post("/user/signup", {
+        await api.post('/user/signup', {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           password: formData.password,
         });
-        if (response.status === 201) {
-          setErrors({});
-          navigate("/money-matters");
-        } else {
-          console.error("Error during sign-up", response.data.error);
-        }
+
+        setErrors({});
+        onNext();
       } catch (error) {
-        console.error("Error during sign-up:", error);
+        console.error('Error during sign-up:', error.response.data.error);
+        setErrors({ api: 'Error during sign-up. Please try again.' });
       }
     }
   };
-
   return (
     <div>
       <h2>User Sign-Up Form</h2>
